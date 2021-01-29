@@ -1,0 +1,29 @@
+
+<ng-container>
+    <div class="container top-margin">
+      <button type="button" class="btn btn-secondary btn-margin" (click)="openEmployeeForm()">Create New Employee</button>
+    <p-table class="table table-striped ptable" [value]="employeeList" [columns]="headers" dataKey="emp" editMode="row">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of this.headers" style = "width: {{col.width}}">
+            {{col.header}}
+        </th>
+        </tr>
+        <tr *ngFor="let rowData of employeeList">
+          <td>{{rowData.name}}</td>
+          <td>{{rowData.designation}}</td>
+          <td>{{rowData.salary}}   <i class='fas fa-edit'></i></td>
+          <td>{{rowData.joiningDate | date: "MMM-dd-YYYY"}} </td>
+          <td>{{rowData.type}}</td>
+          <td style ="width: 5%;">
+           <img src="../../assets/icons/edit-24px.svg"  alt= "edit icon" (click)="editRow(rowData)">
+          </td>
+          <td style ="width: 5%;">
+            <img src="../../assets/icons/delete-24px.svg"   alt= "edit icon" (click)="deleteRow(rowData)">
+          </td>
+        </tr>
+    </ng-template>
+    </p-table>
+  </div>
+</ng-container>
+   
