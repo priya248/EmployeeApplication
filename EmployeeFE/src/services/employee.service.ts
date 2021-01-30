@@ -22,4 +22,14 @@ export class EmployeeService {
     return this.http.post(uri, req, this.httpOptions)
   }
 
+  updateEmp(req:any){
+    var uri = this.baseURL+'/update';
+    return this.http.post(uri, req, this.httpOptions)
+  }
+
+  deleteEmp(req:any){
+    var uri = this.baseURL+'/delete';
+    return this.http.post(uri, req, this.httpOptions)
+  }
+
 }

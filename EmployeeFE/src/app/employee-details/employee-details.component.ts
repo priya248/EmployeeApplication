@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/services/alert.service';
 import { EmployeeService } from 'src/services/employee.service';
-import { UpdateInfoComponent } from '../update-info/update-info.component';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employeeList:any =[];
    dialogConfig:any;
 
-  constructor(private router: Router, private empService: EmployeeService){}
+  constructor(private router: Router, private empService: EmployeeService, private alertService: AlertService){}
 
   ngOnInit(): void {
 
@@ -29,30 +29,14 @@ export class EmployeeDetailsComponent implements OnInit {
       { field: 'type', header: 'Type' , width: '10%' },
       { field: '', header: '' , width: '10%' },
       { field: '', header: '' , width: '10%' }];      
-
-    //   this.employeeList.push(
-    //     {
-    //       "id":1,
-    //     "name": 'Sai',
-    //     "designation": 'FullStack Developer',
-    //     "salary": 85000,
-    //     "joiningDate": new Date(),
-    //     "type": 'Contract'
-    //   });
-    //   this.employeeList.push({
-    //     "id": 2,
-    //     "name": 'Sai',
-    //   "designation": 'FullStack Developer',
-    //   "salary": 85000,
-    //   "joiningDate": new Date(),
-    //   "type": 'Contract'
-    // });
     
+    this.getData();
+  }
+  getData(){
     this.empService.getList().subscribe((res:any)=>{
       if(res.status == 'Success'){
       this.employeeList = res.data;
       }
-      
     })
   }
 
@@ -63,6 +47,17 @@ export class EmployeeDetailsComponent implements OnInit {
     this.router.navigate(['/updateInfo'],{state: row})
   }
   deleteRow(row:any){
+    this.empService.deleteEmp({'id':row._id}).subscribe((res:any)=>{
+      
+      if(res.status == 'Success'){
+      this.employeeList = res.data;
+      this.alertService.message(res.message,'success');
+        this.getData();
+      }
+      else{
+        this.alertService.message(res.data,'error');
+      }
+    })
   }
 
 }

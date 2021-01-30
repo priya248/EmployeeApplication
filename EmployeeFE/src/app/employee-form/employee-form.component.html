@@ -2,19 +2,15 @@
     <h5 class="btn-margin">Employee Registration</h5>
     <form [formGroup]="employeeForm" >
        <label for="name">Name</label> <span class="required">*</span>
-        <input label='Name' required class="form-control input-field" formControlName="name" placeholder="Name">
+        <input label='Name' required class="form-control" formControlName="name" placeholder="Name">
         <label for="designation">Designation</label><span class="required">*</span>
-        <input class="form-control input-field" formControlName="designation" placeholder="Designation">
+        <input class="form-control" formControlName="designation" placeholder="Designation">
         <label for="salary">Salary</label><span class="required">*</span>
-        <input type= "number" class="form-control input-field" formControlName="salary" placeholder="Salary">
+        <input type= "number" class="form-control " formControlName="salary" placeholder="Salary">
         <label for="joiningDate">Joining Date</label><span class="required">*</span>
-        <input type="date" class="form-control input-field" formControlName="joiningDate" placeholder="Joining Date" max="9999-12-31">
+        <input type="date" class="form-control " formControlName="joiningDate" placeholder="Joining Date" max="9999-12-31">
         <label for="type">Type</label><span class="required">*</span>
-
-        <select id="mySelect" class="form-control input-field" formControlName="type" id="type" name="type" placeholder="Type">
-            <option class="form-control input-field style= 'color: red'"  value="fullTime">Full-Time</option>
-            <option class="form-control input-field"  value="contract">Contract</option>
-        </select>
+        <ng-select formControlName="type" [items]="typeList" bindLabel="name" bindValue="id" placeholder="Select Type"></ng-select>
         <button type="button" class="btn btn-secondary btn-margin top-margin right-margin" (click)="backToHome()">Back</button>
         <button type="button" class="btn btn-primary btn-margin top-margin right-margin" [disabled]="employeeForm.invalid" (click)="onSubmit(employeeForm)">Submit</button>
         <div><span class="required">*</span> Indicates required field</div>

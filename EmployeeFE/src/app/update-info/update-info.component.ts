@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/services/alert.service';
+import { EmployeeService } from 'src/services/employee.service';
 @Component({
   selector: 'app-update-info',
   templateUrl: './update-info.component.html',
@@ -11,16 +13,23 @@ export class UpdateInfoComponent implements OnInit {
 
   employeeUpdateForm: FormGroup = new FormGroup({});
   formdata:any;
-  seletedValue ='';
-  constructor(private activatedRoute: ActivatedRoute, private datePipe: DatePipe) {}
+  id:any;
+  typeList = [
+    { id: 'Full-Time', name: 'Full-Time' },
+    { id: 'Contract', name: 'Contract' }
+  ];
+
+  constructor( private datePipe: DatePipe,  private alertService: AlertService, private router : Router,private empService: EmployeeService) {}
 
   ngOnInit(): void {
-    this.formdata =history.state;
-    switch(this.formdata.type){
-      case 'Contract': this.seletedValue = 'contract'; break;
-      case 'Full-Time': this.seletedValue = 'fulltime'; break;
+    
+    if(history.state._id == undefined){
+      this.router.navigate(['']);
     }
+    this.formdata =history.state;
+    this.id= this.formdata.id;
     this.employeeUpdateForm =  new FormGroup({
+      id: new FormControl(this.formdata._id),
       name: new FormControl(this.formdata.name),
       designation: new FormControl(this.formdata.designation),
       salary: new FormControl(this.formdata.salary),
@@ -29,5 +38,23 @@ export class UpdateInfoComponent implements OnInit {
     });
 
   }
+
+  backToHome(){
+    this.router.navigate(['']);
+  }
+  UpdateEmployee(form:FormGroup){
+    this.empService.updateEmp(form.value).subscribe((data:any)=>{
+
+      if(data.status == 'Success' ){
+        this.alertService.message(data.message,'success');
+        this.router.navigate(['']);
+      }
+      else{
+        this.alertService.message(data.data,'error');
+      }
+    
+      });
+  }
+
 
 }

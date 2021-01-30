@@ -16,10 +16,10 @@
           <td>{{rowData.joiningDate | date: "MMM-dd-YYYY"}} </td>
           <td>{{rowData.type}}</td>
           <td >
-           <img src="../../assets/icons/edit-24px.svg"  alt= "edit icon" (click)="editRow(rowData)">
+           <img #img1 src="../../assets/icons/edit-24px.svg"  alt= "edit icon" (click)="editRow(rowData)">
           </td>
           <td >
-            <img src="../../assets/icons/delete-24px.svg"   alt= "edit icon" (click)="deleteRow(rowData)">
+            <img #img2 src="../../assets/icons/delete-24px.svg"   alt= "edit icon" (click)="deleteRow(rowData)">
           </td>
         </tr>
     </ng-template>

@@ -1,4 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 .top-margin{
     margin-top: 2em;
@@ -9,11 +10,7 @@
 .right-margin{
     margin-right: 2em;
 }
-.input-field{
-    border: none;
-    border-bottom: 1px solid;
-    margin-bottom: 10px;
-}
+
 .required{
     color: red;
     margin-left: 5px;

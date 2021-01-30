@@ -11,6 +11,11 @@ import { EmployeeService } from 'src/services/employee.service';
 })
 export class EmployeeFormComponent implements OnInit {
 
+  typeList = [
+    { id: 'Full-Time', name: 'Full-Time' },
+    { id: 'Contract', name: 'Contract' }
+  ];
+
   constructor(private router: Router, private empService: EmployeeService, private alertService: AlertService) { }
 
   employeeForm: FormGroup = new FormGroup({});
@@ -22,7 +27,7 @@ export class EmployeeFormComponent implements OnInit {
       designation: new FormControl('',Validators.required),
       salary: new FormControl('',Validators.required),
       joiningDate: new FormControl('',Validators.required),
-      type: new FormControl('',Validators.required)
+      type: new FormControl(null,Validators.required)
     });
 
   }
@@ -33,7 +38,7 @@ export class EmployeeFormComponent implements OnInit {
   onSubmit(form: FormGroup){
     this.empService.createNewEmp(form.value).subscribe((data:any)=>{
       if(data.status == 'Success' ){
-        this.alertService.message(data.status,'success');
+        this.alertService.message(data.message,'success');
       }
       else{
         this.alertService.message(data.data,'error');
