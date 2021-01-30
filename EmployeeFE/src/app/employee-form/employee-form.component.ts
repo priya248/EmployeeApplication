@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/services/alert.service';
+import { EmployeeService } from 'src/services/employee.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class EmployeeFormComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private empService: EmployeeService, private alertService: AlertService) { }
 
   employeeForm: FormGroup = new FormGroup({});
 
@@ -29,6 +31,15 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup){
-
+    this.empService.createNewEmp(form.value).subscribe((data:any)=>{
+      if(data.status == 'Success' ){
+        this.alertService.message(data.status,'success');
+      }
+      else{
+        this.alertService.message(data.data,'error');
+      }
+    
+      });
+    
   }
 }

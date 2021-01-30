@@ -28,8 +28,6 @@ export class UpdateInfoComponent implements OnInit {
       type: new FormControl(this.formdata.type)
     });
 
-
-    console.log(history.state)
   }
 
 }

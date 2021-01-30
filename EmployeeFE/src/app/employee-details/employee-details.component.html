@@ -15,10 +15,10 @@
           <td>{{rowData.salary}}   <i class='fas fa-edit'></i></td>
           <td>{{rowData.joiningDate | date: "MMM-dd-YYYY"}} </td>
           <td>{{rowData.type}}</td>
-          <td style ="width: 5%;">
+          <td >
            <img src="../../assets/icons/edit-24px.svg"  alt= "edit icon" (click)="editRow(rowData)">
           </td>
-          <td style ="width: 5%;">
+          <td >
             <img src="../../assets/icons/delete-24px.svg"   alt= "edit icon" (click)="deleteRow(rowData)">
           </td>
         </tr>

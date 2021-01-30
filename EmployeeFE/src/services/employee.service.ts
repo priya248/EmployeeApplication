@@ -1,18 +1,25 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-
-  baseURL = 'http://localhost:3000'
+   
+  baseURL = 'http://localhost:3000';
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
   constructor(private http: HttpClient) { }
 
   getList(){
     var uri = this.baseURL+'/getEmpList';
      return this.http.get(uri);
+  }
 
+  createNewEmp(req:any){
+    var uri = this.baseURL+'/create';
+    return this.http.post(uri, req, this.httpOptions)
   }
 
 }

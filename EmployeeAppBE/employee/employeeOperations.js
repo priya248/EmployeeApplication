@@ -9,25 +9,28 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended:true}));
 
-  app.get('/api/emp', function(req,res){
-    var emplo = [
-      {
-        name : 'Will',
-        designation: 'UX designer',
-        salary: 100000,
-        joiningDate: 03/13/2020,
-        type: 'Fulltime'
-      }
-    ]
-    Emp.create(emplo, function(err,result){
-      res.send(result);
-    })
+  app.post('/create', function(req,res){
+    console.log(req.body);
+    Emp.insert(req.body, function(err,result){
+      res.send({'status': 'Success', 'data': result});
+      if(err) { res.send({
+        "status": "error",
+        "data": err.message, 
+        "message": "An error has occurred"
+      });
+    }
+    });
   })
 
   app.get('/getEmpList', function(req,res){
-    
     Emp.find( function(err,result){
-      res.send(result);
+      res.status(200).send({'status': 'Employee record created successfully','data' : result});
+      if(err) { res.send({
+        "status": "error",
+        "data": err.message, 
+        "message": "An error has occurred"
+      });
+    }
     })
   })
 
@@ -41,8 +44,13 @@ module.exports = function(app) {
       joiningDate: req.body.joiningDate,
       type: req.body.type}, function(err, result){
         if(err) throw err,
-        
-        res.send('Success');
+        res.send({'status': 'Success','data' :'Successfully updated record'});
+        if(err) { res.send({
+          "status": "error",
+          "data": err.message, 
+          "message": "An error has occurred"
+        });
+      }
       }
      );
    }

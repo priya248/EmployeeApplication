@@ -1,4 +1,12 @@
 <div class="headbar ">Employee Application</div>
 <div class="container">
+    <div class="alert" style="background-color: #439243;" *ngIf='displaySuccess' >
+        <span class="closebtn" (click)="close()">x</span> 
+        {{message}}
+      </div>
+      <div class="alert"  style="background-color: #bb2937" *ngIf='displayError' >
+        <span class="closebtn" (click)="close()">x</span> 
+        {{message}}
+      </div>
 <router-outlet></router-outlet>
 </div>
