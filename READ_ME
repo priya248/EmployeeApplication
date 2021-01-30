@@ -1,0 +1,18 @@
+This is a Sample Application for adding, updating and deleting employee details.
+
+Techstack:
+
+FrontEnd: Angular 11
+BackEnd: Node.js
+Database: MonogoDB Atlas
+
+Instructions:
+
+1. Node(node package manager) is required to run the application.
+2. Step to run Angular application:
+    Go to application folder - "npm install" 
+                 run command - "npm start"
+3. Steps to run nodejs application
+     Go to application folder - "npm install" 
+                 run command - "npm start"              
+                 
