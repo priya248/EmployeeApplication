@@ -10,6 +10,6 @@ var employeeSchema = new schema({
     type: String,
 })
 
-var emp = mangoose.model('employee',employeeSchema);
+var emp = mangoose.model('employees',employeeSchema);
 
 module.exports = emp;
